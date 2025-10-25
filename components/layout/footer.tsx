@@ -89,9 +89,9 @@ export function Footer() {
 							<Image
 								src="/nt-logo-white-text.svg"
 								alt="Native Teams"
-								width={150}
+								width={212}
 								height={40}
-								className="h-10 w-auto"
+								className="w-auto"
 							/>
 						</Link>
 					</div>

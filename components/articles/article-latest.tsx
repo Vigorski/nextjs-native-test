@@ -2,14 +2,18 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { NewsArticle } from '@/types/news';
 import { ChevronRight } from 'lucide-react';
-import { estimateReadingTime } from '@/lib/reading-time';
+import { estimateReadingTimeFromNewsAPI } from '@/lib/reading-time';
 
 interface ArticleLatestProps {
 	article: NewsArticle;
 }
 
 export function ArticleLatest({ article }: ArticleLatestProps) {
-	const readingTime = estimateReadingTime(article);
+	if (!article) {
+		return null;
+	}
+
+	const readingTime = estimateReadingTimeFromNewsAPI(article);
 
 	return (
 		<section className="container mx-auto block w-full mb-8 mt-12">

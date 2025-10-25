@@ -3,7 +3,7 @@ import Image from 'next/image';
 import { Card, CardContent, CardFooter } from '@/components/ui/card';
 import { NewsArticle } from '@/types/news';
 import { ChevronRight } from 'lucide-react';
-import { estimateReadingTime } from '@/lib/reading-time';
+import { estimateReadingTimeFromNewsAPI } from '@/lib/reading-time';
 
 interface ArticleCardProps {
 	article: NewsArticle;
@@ -11,7 +11,7 @@ interface ArticleCardProps {
 }
 
 export function ArticleCard({ article, priority }: ArticleCardProps) {
-	const readingTime = estimateReadingTime(article);
+	const readingTime = estimateReadingTimeFromNewsAPI(article);
 	const articleUrlEncoded = Buffer.from(article.url).toString('base64url');;
 
 	return (

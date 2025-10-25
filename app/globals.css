@@ -5,7 +5,7 @@
 
 @theme inline {
 	--color-brand-blue: var(--brand-blue);
-	--color-brand-dark-blue: var(--brand-dark-blue);
+	--color-brand-midnight-blue: var(--brand-midnight-blue);
 	--color-ice-cold: var(--ice-cold);
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -50,7 +50,7 @@
   --radius: 0.625rem;
   --background: oklch(1 0 0);
   --brand-blue: #1F2068;
-	--brand-dark-blue: #0A0A2B;
+	--brand-midnight-blue: #0A0A2B;
 	--ice-cold: #EBF3FF;
   --foreground: oklch(0.129 0.042 264.695);
   --card: oklch(1 0 0);
@@ -125,4 +125,111 @@
   body {
     @apply bg-background text-foreground;
   }
+}
+
+/* Article content styles */
+.article-content {
+  @apply text-lg leading-[1.52] text-foreground;
+}
+
+.article-content > * + * {
+  @apply mt-4;
+}
+
+.article-content h1 {
+  @apply text-4xl font-bold mt-8 mb-4;
+}
+
+.article-content h2 {
+  @apply text-3xl font-bold mt-8 mb-4;
+}
+
+.article-content h3 {
+  @apply text-2xl font-semibold mt-6 mb-3;
+}
+
+.article-content h4 {
+  @apply text-xl font-semibold mt-6 mb-3;
+}
+
+.article-content h5 {
+  @apply text-lg font-semibold mt-4 mb-2;
+}
+
+.article-content h6 {
+  @apply text-base font-semibold mt-4 mb-2;
+}
+
+.article-content p {
+  @apply mb-4 leading-7;
+}
+
+.article-content a {
+  @apply text-primary underline hover:text-primary/80 transition-colors;
+}
+
+.article-content strong,
+.article-content b {
+  @apply font-bold;
+}
+
+.article-content em,
+.article-content i {
+  @apply italic;
+}
+
+.article-content ul {
+  @apply list-disc list-inside mb-4 space-y-2;
+}
+
+.article-content ol {
+  @apply list-decimal list-inside mb-4 space-y-2;
+}
+
+.article-content li {
+  @apply leading-7;
+}
+
+.article-content blockquote {
+  @apply border-l-4 border-primary pl-4 italic my-6 text-muted-foreground;
+}
+
+.article-content img {
+  @apply max-w-full lg:max-w-[60%] max-h-[320px] mx-auto h-auto rounded-lg shadow-lg my-8;
+}
+
+.article-content figure {
+  @apply my-8;
+}
+
+.article-content figcaption {
+  @apply text-sm text-muted-foreground text-center mt-2 italic;
+}
+
+.article-content pre {
+  @apply bg-muted p-4 rounded-lg overflow-x-auto my-6;
+}
+
+.article-content code {
+  @apply bg-muted px-1.5 py-0.5 rounded text-sm font-mono;
+}
+
+.article-content pre code {
+  @apply bg-transparent p-0;
+}
+
+.article-content table {
+  @apply w-full border-collapse my-6;
+}
+
+.article-content th {
+  @apply border border-border bg-muted p-2 text-left font-semibold;
+}
+
+.article-content td {
+  @apply border border-border p-2;
+}
+
+.article-content hr {
+  @apply my-8 border-border;
 }

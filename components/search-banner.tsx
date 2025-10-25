@@ -28,7 +28,7 @@ export function SearchBanner({ simpleSearch }: SearchBannerProps) {
 						alt="Native Teams Heart"
 						width={80}
 						height={80}
-						className="absolute top-4 left-[-50px]"
+						className="absolute top-4 left-[-50px] w-auto"
 					/>
 					<Image
 						src="/star.svg"

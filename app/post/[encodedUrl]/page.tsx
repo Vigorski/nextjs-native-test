@@ -1,14 +1,19 @@
+import { ArticleExtracted } from '@/components/articles/article-extracted';
+import { InfoCTA } from '@/components/info-cta';
+
 interface PostPageProps {
 	params: Promise<{ encodedUrl: string }>;
 }
 
 export default async function PostPage({ params }: PostPageProps) {
 	const { encodedUrl } = await params;
-	const articleUrlDecoded = Buffer.from(encodedUrl, 'base64url').toString();
-	
+	const articleUrl = Buffer.from(encodedUrl, 'base64url').toString();
+
 	return (
-		<div>
-			<h1>{articleUrlDecoded}</h1>
-		</div>
+		<>
+			<ArticleExtracted articleUrl={articleUrl} />
+			<InfoCTA theme="dark" />
+			{/* I was unable to extract enough information from the article about the author (aside from the name) to display it here as a separate section. The plugin I used called @extractus/article-extractor could only gather the author's name. */}
+		</>
 	);
 }

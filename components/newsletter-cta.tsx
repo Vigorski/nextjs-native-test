@@ -1,4 +1,3 @@
-// components/newsletter-cta.tsx
 'use client';
 
 import { useState } from 'react';
@@ -8,12 +7,10 @@ import { ActionInput } from '@/components/common/action-input';
 import {
 	DialogHeader,
 	Dialog,
-	DialogClose,
 	DialogContent,
 	DialogDescription,
 	DialogTitle,
 } from './ui/dialog';
-import { Button } from './ui/button';
 
 export function NewsletterCTA() {
 	const [open, setOpen] = useState(false);
@@ -24,7 +21,7 @@ export function NewsletterCTA() {
 
 	return (
 		<>
-			<section className="w-full bg-brand-dark-blue py-18 px-4 border-t border-gray-200 relative">
+			<section className="w-full bg-brand-midnight-blue py-18 px-4 border-t border-gray-200 relative">
 				<div className="absolute inset-0 pointer-events-none overflow-hidden">
 					<Image
 						src="/star.svg"
