@@ -1,8 +1,12 @@
-import { ArticleCard } from '@/components/article-card';
-import { ArticlePagination } from '@/components/article-pagination';
-import { CategoryFilter } from '@/components/category-filter';
+import { Pagination } from '@/components/common/pagination';
+import { CategoryFilter } from '@/components/common/category-filter';
+import { ArticlesGrid } from '@/components/articles/articles-grid';
 import { newsClient } from '@/lib/news-api';
 import { Category } from '@/types/news';
+import { ArticleLatest } from '@/components/articles/article-latest';
+import { InfoCTA } from '@/components/info-cta';
+import { SearchBanner } from '@/components/search-banner';
+import { NewsletterCTA } from '@/components/newsletter-cta';
 
 const PAGE_SIZE = 9;
 const DEFAULT_CATEGORY = 'technology';
@@ -17,39 +21,20 @@ interface HomeProps {
 
 export default async function Home({ searchParams }: HomeProps) {
 	const params = await searchParams;
-
 	const category = (params.category || DEFAULT_CATEGORY) as Category;
   const currentPage = Number(params.page || DEFAULT_PAGE);
-
 	const {articles, totalResults} = await newsClient.fetchTopHeadlines(category, currentPage, PAGE_SIZE);
-	
 	const totalPages = Math.ceil(totalResults / PAGE_SIZE);
-
-	console.log(articles, totalResults);
-	
+	console.log(articles);
   return (
-		<div>
+		<>
+			<SearchBanner />
 			<CategoryFilter />
-
-			<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-				{articles.map((article, index) => (
-					<ArticleCard
-						key={`${article.url}-${index}`}
-						article={article}
-					/>
-				))}
-
-				{articles.length === 0 && (
-					<div className="text-center py-8">
-						<p className="text-muted-foreground">
-							No articles found for this category.
-						</p>
-					</div>
-				)}
-				
-			</div>
-
-			<ArticlePagination totalPages={totalPages} />
-		</div>
+			<ArticleLatest article={articles[0]} />
+			<ArticlesGrid articles={articles} />
+			<Pagination totalPages={totalPages} />
+			<InfoCTA />
+			<NewsletterCTA />
+		</>
   );
 }

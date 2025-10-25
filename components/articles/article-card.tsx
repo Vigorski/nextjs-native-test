@@ -7,16 +7,18 @@ import { estimateReadingTime } from '@/lib/reading-time';
 
 interface ArticleCardProps {
 	article: NewsArticle;
+	priority?: boolean;
 }
 
-export function ArticleCard({ article }: ArticleCardProps) {
+export function ArticleCard({ article, priority }: ArticleCardProps) {
 	const readingTime = estimateReadingTime(article);
+	const articleUrlEncoded = Buffer.from(article.url).toString('base64url');;
 
 	return (
 		<Link
-			href={`/post/`}
+			href={`/post/${articleUrlEncoded}`}
 			className="block h-full">
-			<Card className="h-full flex flex-col gap-0 hover:shadow-lg transition-shadow">
+			<Card className="h-full flex flex-col gap-0 hover:shadow-[-6px_6px_0px_0px] shadow-primary transition-shadow">
 				<div className="relative h-48 w-full overflow-hidden rounded-t-lg">
 					{article.urlToImage ? (
 						<Image
@@ -25,6 +27,7 @@ export function ArticleCard({ article }: ArticleCardProps) {
 							fill
 							className="object-cover"
 							sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+							priority={priority}
 						/>
 					) : (
 						<div className="h-full w-full bg-muted flex items-center justify-center">
@@ -46,7 +49,7 @@ export function ArticleCard({ article }: ArticleCardProps) {
 				</CardContent>
 
 				<CardFooter className="p-4 pt-0">
-					<p className="text-sm text-muted-foreground flex items-center gap-2">
+					<p className="text-sm text-primary font-semibold flex items-center gap-2">
 						Read more <ChevronRight className="h-6 w-6" />
 					</p>
 				</CardFooter>

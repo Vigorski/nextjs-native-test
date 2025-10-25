@@ -19,24 +19,26 @@ export function CategoryFilter() {
   };
 
   return (
-    <div className="flex flex-wrap gap-2 mb-6">
-      {CATEGORIES.map((category) => {
-        const isActive = currentCategory === category;
-        
-        return (
-          <Link key={category} href={createCategoryUrl(category)}>
-            <Button
-							className={cn(
-								'capitalize cursor-pointer hover:bg-stone-200 hover:text-zinc-700 rounded-full',
-								isActive ? 'bg-primary text-white' : 'bg-stone-100 text-zinc-500'
-							)}
-              size="lg"
-            >
-              {category}
-            </Button>
-          </Link>
-        );
-      })}
-    </div>
+		<div className="container mx-auto">
+			<div className="flex flex-wrap gap-2 mb-6">
+				{CATEGORIES.map((category) => {
+					const isActive = currentCategory === category;
+					
+					return (
+						<Link key={category} href={createCategoryUrl(category)}>
+							<Button
+								className={cn(
+									'capitalize cursor-pointer hover:bg-stone-200 hover:text-zinc-700 rounded-full',
+									isActive ? 'bg-primary text-white' : 'bg-stone-100 text-zinc-500'
+								)}
+								size="xl"
+							>
+								{category}
+							</Button>
+						</Link>
+					);
+				})}
+			</div>
+		</div>
   );
 }
