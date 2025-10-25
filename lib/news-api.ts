@@ -36,7 +36,6 @@ class NewsAPIClient {
 					Accept: 'application/json'
 				}
 			});
-			console.log(`${this.baseUrl}/top-headlines?${params}`);
 
 			if (!response.ok) {
 				throw new Error(
