@@ -26,10 +26,10 @@ export function Breadcrumbs({ items, showHome = true }: BreadcrumbsProps) {
 					<>
 						<BreadcrumbItem>
 							<BreadcrumbLink asChild>
-								<Link href="/">News</Link>
+								<Link href="/" className="text-foreground text-base">News</Link>
 							</BreadcrumbLink>
 						</BreadcrumbItem>
-						<BreadcrumbSeparator />
+						<BreadcrumbSeparator className="[&>svg]:size-5 text-foreground" />
 					</>
 				)}
 
@@ -39,13 +39,13 @@ export function Breadcrumbs({ items, showHome = true }: BreadcrumbsProps) {
 					return (
 						<BreadcrumbItem key={index}>
 							{isLast ? (
-								<BreadcrumbPage className="line-clamp-1 max-w-[200px]">
+								<BreadcrumbPage className="text-primary line-clamp-1 max-w-[200px] text-base">
 									{item.label}
 								</BreadcrumbPage>
 							) : (
 								<>
 									<BreadcrumbLink asChild>
-										<Link href={item.href || '#'}>{item.label}</Link>
+										<Link href={item.href || '#'} className="text-foreground text-base">{item.label}</Link>
 									</BreadcrumbLink>
 									<BreadcrumbSeparator />
 								</>

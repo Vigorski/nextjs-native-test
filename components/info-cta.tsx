@@ -8,21 +8,21 @@ interface InfoCTAProps {
 
 export function InfoCTA({ theme = 'light' }: InfoCTAProps) {
 	return (
-		<section className={cn('px-16 bg-accent py-32 relative', theme === 'dark' ? 'bg-brand-midnight-blue' : 'bg-accent')}>
+		<section className={cn('px-5 sm:px-16 bg-accent py-15 sm:py-32 relative', theme === 'dark' ? 'bg-brand-midnight-blue' : 'bg-accent')}>
 			<div className="absolute inset-0 pointer-events-none overflow-hidden">
 				<Image
 					src="/nt-logo-primary.svg"
 					alt="Native Teams Logo"
 					width={300}
 					height={300}
-					className={cn('absolute top-0 left-0 h-full w-auto opacity-10', theme === 'dark' ? 'opacity-18' : 'opacity-10')}
+					className={cn('hidden sm:block absolute top-0 left-0 h-full w-auto opacity-10', theme === 'dark' ? 'opacity-18' : 'opacity-10')}
 				/>
 				<Image
 					src="/star.svg"
 					alt="Star"
 					width={64}
 					height={64}
-					className="absolute top-10 right-20 opacity-60"
+					className="absolute top-5 sm:top-10 right-10 sm:right-20 opacity-60 w-[40px] h-[40px] sm:w-[64px] sm:h-[64px]"
 				/>
 			</div>
 			<div className="container mx-auto text-center">
@@ -38,7 +38,7 @@ export function InfoCTA({ theme = 'light' }: InfoCTAProps) {
 
 				<Button
 					size="lg"
-					className="text-lg px-8 py-6 group rounded-full">
+					className="text-lg px-8 py-6 group rounded-full w-full sm:w-auto">
 					Learn more
 				</Button>
 			</div>

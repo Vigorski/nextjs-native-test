@@ -24,7 +24,7 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
 	const totalPages = Math.ceil(totalResults / PAGE_SIZE);
 
 	return (
-		<>
+		<div className="px-5">
 			<SearchBanner simpleSearch />
 			{articles.length > 0 && (
 				<h2 className="text-2xl font-bold text-center my-10">
@@ -33,6 +33,6 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
 			)}
 			<ArticlesGrid articles={articles} />
 			<Pagination totalPages={totalPages} />
-		</>
+		</div>
 	);
 }

@@ -17,8 +17,8 @@ export function ArticleLatest({ article }: ArticleLatestProps) {
 
 	return (
 		<section className="container mx-auto block w-full mb-8 mt-12">
-			<div className="grid grid-cols-1 gap-15 lg:grid-cols-2 bg-ice-cold border border-gray-200 rounded-lg py-20 px-25">
-				<div className="relative h-64 lg:h-auto min-h-[300px] xl:min-h-[400px]">
+			<div className="grid grid-cols-1 gap-5 lg:gap-15 lg:grid-cols-2 bg-ice-cold border border-gray-200 rounded-lg py-15 px-5 lg:py-20 lg:px-25">
+				<div className="relative h-64 lg:h-auto min-h-[300px] xl:min-h-[400px] order-2 lg:order-1">
 					{article.urlToImage ? (
 						<Image
 							src={article.urlToImage}
@@ -35,8 +35,8 @@ export function ArticleLatest({ article }: ArticleLatestProps) {
 					)}
 				</div>
 
-				<div className="flex flex-col gap-5 py-4 lg:py-8">
-					<div className="flex items-center bg-primary px-6 py-2.5 rounded-md w-fit">
+				<div className="flex flex-col gap-5 py-4 lg:py-8 order-1 lg:order-2">
+					<div className="hidden md:flex items-center bg-primary px-6 py-2.5 rounded-md w-fit">
 						<span className="text-xs font-medium text-white">
 							{readingTime} min read
 						</span>

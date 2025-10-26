@@ -51,7 +51,9 @@ export async function extractArticle(
 	try {
 		const article = await extract(
 			url,
-			{},
+			{
+				wordsPerMinute: 250
+			},
 			{
 				headers: {
 					'User-Agent':

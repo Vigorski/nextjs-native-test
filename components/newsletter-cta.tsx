@@ -28,7 +28,7 @@ export function NewsletterCTA() {
 						alt="Star"
 						width={122}
 						height={122}
-						className="absolute bottom-10 right-20 opacity-60"
+						className="hidden sm:block absolute bottom-10 right-20 opacity-60"
 					/>
 				</div>
 				<div className="container mx-auto max-w-2xl text-center space-y-8">

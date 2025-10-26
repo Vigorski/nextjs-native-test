@@ -28,7 +28,7 @@ export const ActionInput = ({
 	return (
 		<form
 			onSubmit={handleSubmit}
-			className="w-full max-w-2xl relative">
+			className="w-full max-w-2xl relative flex flex-col sm:flex-row">
 			<Input
 				id="search"
 				type="text"
@@ -40,7 +40,7 @@ export const ActionInput = ({
 			<Button
 				type="submit"
 				size="xl"
-				className="absolute right-0 top-0 h-full px-12 rounded-full">
+				className="static sm:absolute mt-4 sm:mt-0 right-0 top-0 h-12 px-12 rounded-full">
 				{buttonText}
 			</Button>
 		</form>

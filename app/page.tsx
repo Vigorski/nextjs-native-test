@@ -28,11 +28,13 @@ export default async function Home({ searchParams }: HomeProps) {
 	console.log(articles);
   return (
 		<>
-			<SearchBanner />
-			<CategoryFilter />
-			<ArticleLatest article={articles[0]} />
-			<ArticlesGrid articles={articles} />
-			<Pagination totalPages={totalPages} />
+			<div className="px-5">
+				<SearchBanner />
+				<CategoryFilter />
+				<ArticleLatest article={articles[0]} />
+				<ArticlesGrid articles={articles} />
+				<Pagination totalPages={totalPages} />
+			</div>
 			<InfoCTA />
 			<NewsletterCTA />
 		</>

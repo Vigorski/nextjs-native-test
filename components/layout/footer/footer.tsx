@@ -1,6 +1,11 @@
-// components/layout/footer.tsx
 import Image from 'next/image';
 import Link from 'next/link';
+import { Accordion } from '@/components/ui/accordion';
+import { FooterLink } from './footer-link';
+import {
+	FooterLinkSectionDesktop,
+	FooterLinkSectionMobile
+} from './footer-link-section';
 
 const footerLinks = [
 	{
@@ -41,47 +46,11 @@ const footerLinks = [
 	}
 ];
 
-interface FooterLinkProps {
-	href: string;
-	children: React.ReactNode;
-}
-
-const FooterLink = ({ href, children }: FooterLinkProps) => (
-	<Link
-		href={href}
-		className="text-sm text-white/60 hover:text-white transition-colors">
-		{children}
-	</Link>
-);
-
-interface FooterLinkType {
-	href: string;
-	label: string;
-}
-
-interface FooterSectionProps {
-	title: string;
-	links: FooterLinkType[];
-}
-
-const FooterSection = ({ title, links }: FooterSectionProps) => (
-	<div>
-		<h3 className="text-sm font-bold uppercase mb-4 text-white">{title}</h3>
-		<ul className="space-y-3">
-			{links.map(link => (
-				<li key={link.label}>
-					<FooterLink href={link.href}>{link.label}</FooterLink>
-				</li>
-			))}
-		</ul>
-	</div>
-);
-
 export function Footer() {
 	return (
 		<footer className="w-full bg-brand-blue">
-			<div className="container mx-auto px-4 py-25">
-				<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
+			<div className="container mx-auto px-4 pt-11 pb-16 md:py-25">
+				<div className="grid grid-cols-1 md:grid-cols-4 gap-8 md:gap-12">
 					<div>
 						<Link
 							href="/"
@@ -96,13 +65,29 @@ export function Footer() {
 						</Link>
 					</div>
 
-					{footerLinks.map(section => (
-						<FooterSection
-							key={section.title}
-							title={section.title}
-							links={section.links}
-						/>
-					))}
+					<div className="md:hidden col-span-1">
+						<Accordion
+							type="multiple"
+							className="w-full">
+							{footerLinks.map(section => (
+								<FooterLinkSectionMobile
+									key={section.title}
+									title={section.title}
+									links={section.links}
+								/>
+							))}
+						</Accordion>
+					</div>
+
+					<div className="hidden md:contents">
+						{footerLinks.map(section => (
+							<FooterLinkSectionDesktop
+								key={section.title}
+								title={section.title}
+								links={section.links}
+							/>
+						))}
+					</div>
 				</div>
 			</div>
 
@@ -111,11 +96,20 @@ export function Footer() {
 					<div className="flex flex-col md:flex-row justify-between items-center gap-4">
 						<p className="text-sm text-white/60">&copy; Native Teams Limited</p>
 						<div className="flex items-center gap-2 text-sm text-white/60">
-							<FooterLink href="#">Cookie Policy</FooterLink>
+							<FooterLink
+								href="#"
+								label="Cookie Policy"
+							/>
 							<span>|</span>
-							<FooterLink href="#">Privacy Policy</FooterLink>
+							<FooterLink
+								href="#"
+								label="Privacy Policy"
+							/>
 							<span>|</span>
-							<FooterLink href="#">Terms & Conditions</FooterLink>
+							<FooterLink
+								href="#"
+								label="Terms & Conditions"
+							/>
 						</div>
 					</div>
 				</div>

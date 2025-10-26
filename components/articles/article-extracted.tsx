@@ -1,6 +1,3 @@
-import Link from 'next/link';
-import { ExternalLink } from 'lucide-react';
-import { Button } from '@/components/ui/button';
 import { extractArticle } from '@/lib/extract-article';
 import { Breadcrumbs } from '@/components/common/breadcrumbs';
 import Image from 'next/image';
@@ -12,7 +9,6 @@ export const ArticleExtracted = async ({
 	articleUrl: string;
 }) => {
 	const data = await extractArticle(articleUrl);
-	const sanitizedContent = data?.error ? '' : data?.content || '';
 	const readingTime = data?.ttr && Math.ceil(data?.ttr / 60);
 	const publishedTime = data?.published
 		? new Date(data?.published).toLocaleDateString('en-US', {
@@ -64,34 +60,12 @@ export const ArticleExtracted = async ({
 					</div>
 				)}
 
-				{sanitizedContent && (
+				{data.content && (
 					<article
 						className="article-content"
-						dangerouslySetInnerHTML={{ __html: sanitizedContent }}
+						dangerouslySetInnerHTML={{ __html: data.content }}
 					/>
 				)}
-
-				<div className="my-12 pt-8">
-					<div className="bg-accent p-6 rounded-lg flex flex-col sm:flex-row items-center justify-between gap-4">
-						<div>
-							<p className="font-semibold mb-1">Read the original article</p>
-							<p className="text-sm text-muted-foreground">
-								Visit the source for the complete experience
-							</p>
-						</div>
-						<Button
-							size="lg"
-							className="rounded-full"
-							asChild>
-							<Link
-								href={articleUrl}
-								target="_blank">
-								View Original
-								<ExternalLink className="h-4 w-4" />
-							</Link>
-						</Button>
-					</div>
-				</div>
 			</div>
 		</section>
 	);

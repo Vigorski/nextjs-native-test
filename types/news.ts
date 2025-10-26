@@ -29,7 +29,7 @@ export const CATEGORIES = [
 	'entertainment',
 	'general',
 	'health',
-	'sciences',
+	'science',
 	'sports',
 	'technology'
 ] as const;
