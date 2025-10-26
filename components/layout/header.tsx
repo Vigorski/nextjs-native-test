@@ -31,6 +31,7 @@ export const Header = () => {
 							alt="Logo" 
 							width={158} 
 							height={29}
+							priority
 						/>
 					</Link>
 

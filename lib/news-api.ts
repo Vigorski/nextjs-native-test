@@ -83,5 +83,5 @@ class NewsAPIClient {
 }
 
 export const newsClient = new NewsAPIClient(
-	process.env.NEXT_PUBLIC_NEWS_API_KEY || ''
+	process.env.NEWS_API_KEY || ''
 );
