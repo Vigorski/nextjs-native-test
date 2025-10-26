@@ -4,6 +4,7 @@ import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/card'
 import { NewsArticle } from '@/types/news';
 import { ChevronRight } from 'lucide-react';
 import { estimateReadingTimeFromNewsAPI } from '@/lib/reading-time';
+import { encodeUrl } from '@/lib/utils';
 
 interface ArticleCardProps {
 	article: NewsArticle;
@@ -12,7 +13,7 @@ interface ArticleCardProps {
 
 export function ArticleCard({ article, priority }: ArticleCardProps) {
 	const readingTime = estimateReadingTimeFromNewsAPI(article);
-	const articleUrlEncoded = Buffer.from(article.url).toString('base64url');;
+	const articleUrlEncoded = encodeUrl(article.url);
 
 	return (
 		<Link

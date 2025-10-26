@@ -1,6 +1,7 @@
 import { ArticleExtracted } from '@/components/articles/article-extracted';
 import { ReadMoreCTA } from '@/components/articles/read-more-cta';
 import { InfoCTA } from '@/components/info-cta';
+import { decodeUrl } from '@/lib/utils';
 
 interface PostPageProps {
 	params: Promise<{ encodedUrl: string }>;
@@ -8,7 +9,7 @@ interface PostPageProps {
 
 export default async function PostPage({ params }: PostPageProps) {
 	const { encodedUrl } = await params;
-	const articleUrl = Buffer.from(encodedUrl, 'base64url').toString();
+	const articleUrl = decodeUrl(encodedUrl);
 
 	return (
 		<>

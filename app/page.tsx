@@ -25,7 +25,7 @@ export default async function Home({ searchParams }: HomeProps) {
   const currentPage = Number(params.page || DEFAULT_PAGE);
 	const {articles, totalResults} = await newsClient.fetchTopHeadlines(category, currentPage, PAGE_SIZE);
 	const totalPages = Math.ceil(totalResults / PAGE_SIZE);
-	console.log(articles);
+
   return (
 		<>
 			<div className="px-5">

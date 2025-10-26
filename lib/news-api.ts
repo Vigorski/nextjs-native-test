@@ -1,15 +1,46 @@
 import { Category, NewsResponse } from '@/types/news';
 
 class NewsAPIClient {
-	private apiKey: string;
-	private baseUrl = 'https://newsapi.org/v2';
+	private readonly baseUrl = 'https://newsapi.org/v2';
 
-	constructor(apiKey: string) {
+	constructor(private readonly apiKey: string) {
 		if (!apiKey) {
 			throw new Error('NewsAPI key is required');
 		}
+	}
 
-		this.apiKey = apiKey;
+	private async fetchArticles(endpoint: string, params: URLSearchParams): Promise<Omit<NewsResponse, 'status'>> {
+		try {
+			const response = await fetch(`${this.baseUrl}${endpoint}?${params}`, {
+				next: { revalidate: 600 },
+				headers: {
+					Accept: 'application/json',
+					'X-Api-Key': this.apiKey
+				}
+			});
+
+			if (!response.ok) {
+				throw new Error(
+					`NewsAPI HTTP error: ${response.status} ${response.statusText}`
+				);
+			}
+
+			const data: NewsResponse = await response.json();
+
+			if (data.status !== 'ok') {
+      	throw new Error('NewsAPI returned an error');
+			}
+
+			return {articles: data.articles, totalResults: data.totalResults};
+		} catch (error) {
+			if (error instanceof Error) {
+				console.error('NewsAPI Error:', error.message);
+				throw error;
+			}
+
+			console.error('Unexpected error:', error);
+			throw new Error('An unexpected error occurred while fetching news');
+		}
 	}
 
 	async fetchTopHeadlines(
@@ -17,48 +48,17 @@ class NewsAPIClient {
 		page = 1,
 		pageSize = 50,
 	): Promise<Omit<NewsResponse, 'status'>> {
-		if (!category || category.trim() === '') {
-			throw new Error('Query parameter is required');
+		if (!category) {
+			throw new Error('Category is required');
 		}
 
-		
 		const params = new URLSearchParams({
 			category: category,
 			pageSize: pageSize.toString(),
-			page: page.toString(),
-			apiKey: this.apiKey
+			page: page.toString()
 		});
 		
-		try {
-			const response = await fetch(`${this.baseUrl}/top-headlines?${params}`, {
-				next: { revalidate: 600 },
-				headers: {
-					Accept: 'application/json'
-				}
-			});
-
-			if (!response.ok) {
-				throw new Error(
-					`NewsAPI HTTP error: ${response.status} ${response.statusText}`
-				);
-			}
-
-			const data: NewsResponse = await response.json();
-
-			if (data.status !== 'ok') {
-				throw new Error('NewsAPI returned an error');
-			}
-
-			return {articles: data.articles, totalResults: data.totalResults};
-		} catch (error) {
-			if (error instanceof Error) {
-				console.error('NewsAPI Error:', error.message);
-				throw error;
-			}
-
-			console.error('Unexpected error:', error);
-			throw new Error('An unexpected error occurred while fetching news');
-		}
+		return await this.fetchArticles('/top-headlines', params);
 	}
 
 	async fetchEverything(
@@ -66,8 +66,8 @@ class NewsAPIClient {
 		page = 1,
 		pageSize = 50
 	): Promise<Omit<NewsResponse, 'status'>> {
-		if (!query || query.trim() === '') {
-			throw new Error('Query parameter is required');
+		if (!query) {
+			throw new Error('Query is required');
 		}
 
 		const params = new URLSearchParams({
@@ -75,39 +75,10 @@ class NewsAPIClient {
 			pageSize: pageSize.toString(),
 			page: page.toString(),
 			sortBy: 'popularity',
-			apiKey: this.apiKey
+			language: 'en'
 		});
 
-		try {
-			const response = await fetch(`${this.baseUrl}/everything?${params}`, {
-				next: { revalidate: 600 },
-				headers: {
-					Accept: 'application/json'
-				}
-			});
-
-			if (!response.ok) {
-				throw new Error(
-					`NewsAPI HTTP error: ${response.status} ${response.statusText}`
-				);
-			}
-
-			const data: NewsResponse = await response.json();
-
-			if (data.status !== 'ok') {
-				throw new Error('NewsAPI returned an error');
-			}
-
-			return {articles: data.articles, totalResults: data.totalResults};
-		} catch (error) {
-			if (error instanceof Error) {
-				console.error('NewsAPI Error:', error.message);
-				throw error;
-			}
-
-			console.error('Unexpected error:', error);
-			throw new Error('An unexpected error occurred while fetching news');
-		}
+		return await this.fetchArticles('/everything', params);
 	}
 }
 

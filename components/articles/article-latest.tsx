@@ -3,6 +3,7 @@ import Image from 'next/image';
 import { NewsArticle } from '@/types/news';
 import { ChevronRight } from 'lucide-react';
 import { estimateReadingTimeFromNewsAPI } from '@/lib/reading-time';
+import { encodeUrl } from '@/lib/utils';
 
 interface ArticleLatestProps {
 	article: NewsArticle;
@@ -13,6 +14,7 @@ export function ArticleLatest({ article }: ArticleLatestProps) {
 		return null;
 	}
 
+	const articleUrlEncoded = encodeUrl(article.url);
 	const readingTime = estimateReadingTimeFromNewsAPI(article);
 
 	return (
@@ -53,8 +55,7 @@ export function ArticleLatest({ article }: ArticleLatestProps) {
 					)}
 
 					<Link
-						href={article.url}
-						target="_blank"
+						href={`/post/${articleUrlEncoded}`}
 						className="flex items-center gap-2 text-primary font-semibold group mt-auto">
 						<span>Read more</span>
 						<ChevronRight className="h-8 w-8 group-hover:translate-x-1 transition-transform" />
